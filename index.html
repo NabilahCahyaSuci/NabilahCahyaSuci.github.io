@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Program Fibonaci - Pink Version</title>
+  <title>Program Deret Fibonacci</title>
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -23,16 +23,16 @@
     .card {
       width: 100%;
       max-width: 850px;
-      background: white;
+      background: #ffffff;
       border-radius: 35px;
       padding: 40px;
-      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
       text-align: center;
     }
 
     h2 {
       margin-top: 0;
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 700;
       color: #ff4fa3;
     }
@@ -41,22 +41,13 @@
       color: #666;
       font-size: 16px;
       line-height: 1.7;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
-    .image-wrapper {
-      background: #ffe6f2;
-      padding: 15px;
-      border-radius: 25px;
-      margin-bottom: 25px;
-    }
-
-    img {
-      width: 100%;
-      border-radius: 20px;
-    }
-
-    button {
+    /* Tombol di atas kotak pink */
+    .top-btn {
+      display: block;
+      margin: 0 auto 25px auto;
       background: #ff4fa3;
       color: white;
       border: none;
@@ -68,9 +59,20 @@
       transition: 0.3s ease;
     }
 
-    button:hover {
+    .top-btn:hover {
       background: #e13d8d;
       transform: scale(1.05);
+    }
+
+    .pink-box {
+      background: #ffe6f2;
+      padding: 20px;
+      border-radius: 25px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 20px;
     }
 
     .source {
@@ -102,7 +104,6 @@
     @media (max-width: 600px) {
       .card {
         padding: 25px;
-        border-radius: 25px;
       }
 
       h2 {
@@ -118,20 +119,22 @@
 <body>
 
   <div class="card">
-    <h2>Program Perhitungan Dart</h2>
+    <h2>Program Deret Fibonacci</h2>
     <p>
-      Halaman ini menampilkan hasil output dari program Fibonacci yang di
-      jalankan menggunakan program Dart.
-      Klik tombol di bawah untuk melihat source code.
+      Halaman ini menampilkan hasil output dari program Fibonacci 
+      yang dibuat menggunakan bahasa Dart.
+      Klik tombol di bawah untuk melihat source code program.
     </p>
 
-    <div class="image-wrapper">
-      
-      <button onclick="toggleSource()">Lihat Source Code</button>
+    <!-- Tombol sekarang benar-benar di atas kotak pink -->
+    <button class="top-btn" onclick="toggleSource()">Lihat Source Code</button>
 
+    <!-- Kotak pink -->
+    <div class="pink-box">
       <img src="Cuplikan layar 2026-02-26 080155.png" alt="Hasil Output Program Dart">
     </div>
 
+    <!-- Source Code -->
     <div class="source" id="sourceBox">
       <div class="close" onclick="toggleSource()">✖</div>
       <iframe src="https://dartpad.dev/embed-dart.html?id=929eb97413537d2a787928ae6f4ca447"></iframe>
@@ -147,5 +150,4 @@
 
 </body>
 </html>
-
          
