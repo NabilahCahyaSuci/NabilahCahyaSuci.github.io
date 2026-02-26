@@ -1,117 +1,149 @@
-import 'package:flutter/material.dart';
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Fibonaci - Pink Version</title>
 
-void main() {
-  runApp(const MyApp());
-}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  int fibonacci(int n) {
-    if (n <= 1) return n;
-    int a = 0, b = 1, c = 0;
-    for (int i = 2; i <= n; i++) {
-      c = a + b;
-      a = b;
-      b = c;
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #ff9ecf, #ffc2e2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
     }
-    return b;
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    int hasil = fibonacci(20);
+    .card {
+      width: 100%;
+      max-width: 850px;
+      background: white;
+      border-radius: 35px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+      text-align: center;
+    }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF2B0A3D),
-                Color(0xFF0F172A),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: Center(
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black54,
-                    blurRadius: 10,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    "Program Fibonacci",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    "Menghitung Fibonacci ke-20",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                  const SizedBox(height: 20),
+    h2 {
+      margin-top: 0;
+      font-size: 30px;
+      font-weight: 700;
+      color: #ff4fa3;
+    }
 
-                  // 🔥 Tombol Pink
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.pink,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      "Lihat Source di DartPad",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+    p {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
 
-                  const SizedBox(height: 20),
+    .image-wrapper {
+      background: #ffe6f2;
+      padding: 15px;
+      border-radius: 25px;
+      margin-bottom: 25px;
+    }
 
-                  // 📦 Output box
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.black87,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      "fibonacci(20) = $hasil\nULIYA GUMPARI",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'monospace',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+    img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    button {
+      background: #ff4fa3;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #e13d8d;
+      transform: scale(1.05);
+    }
+
+    .source {
+      display: none;
+      margin-top: 30px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #ffd1e8;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #ff4fa3;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+        border-radius: 25px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      iframe {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Program Perhitungan Dart</h2>
+    <p>
+      Versi pink aesthetic dari program Dart.
+      Klik tombol di bawah untuk melihat source code.
+    </p>
+
+    <div class="image-wrapper">
+      <img src="dartpad 2.png" alt="Hasil Output Program Dart">
+    </div>
+
+    <button onclick="toggleSource()">Lihat Source Code</button>
+
+    <div class="source" id="sourceBox">
+      <div class="close" onclick="toggleSource()">✖</div>
+      <iframe src="https://dartpad.dev/embed-dart.html?id=929eb97413537d2a787928ae6f4ca447"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function toggleSource() {
+      var box = document.getElementById("sourceBox");
+      box.style.display = (box.style.display === "block") ? "none" : "block";
+    }
+  </script>
+
+</body>
+</html>
+
+         
