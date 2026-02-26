@@ -1,159 +1,184 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pink Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Deret Fibonacci</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Quicksand', sans-serif;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #ff9ecf, #ffc2e2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-body{
-  background: linear-gradient(135deg,#ffd6ec,#ffb3da);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
+    .card {
+      width: 100%;
+      max-width: 850px;
+      background: #ffffff;
+      border-radius: 35px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+      text-align: center;
+    }
 
-/* CARD */
-.card{
-  background:#fff0f7;
-  width:90%;
-  max-width:360px;
-  border-radius:35px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 15px 35px rgba(255,105,180,0.2);
-}
+    h2 {
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ff4fa3;
+    }
 
-.card img{
-  width:110px;
-  border-radius:25px;
-  margin-bottom:15px;
-}
+    p {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
 
-.card h2{
-  color:#d63384;
-  margin-bottom:10px;
-}
+    .top-btn {
+      display: block;
+      margin: 0 auto 25px auto;
+      background: #ff4fa3;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
 
-.card p{
-  font-size:14px;
-  color:#6c4675;
-  margin-bottom:20px;
-}
+    .top-btn:hover {
+      background: #e13d8d;
+      transform: scale(1.05);
+    }
 
-/* BUTTON */
-button{
-  background: linear-gradient(45deg,#ff69b4,#ff85c2);
-  border:none;
-  padding:10px 22px;
-  border-radius:25px;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s ease;
-}
+    .pink-box {
+      background: #ffe6f2;
+      padding: 20px;
+      border-radius: 25px;
+    }
 
-button:hover{
-  transform:scale(1.07);
-  box-shadow:0 8px 20px rgba(255,105,180,0.4);
-}
+    img {
+      width: 100%;
+      border-radius: 20px;
+    }
 
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
-  background:rgba(255,182,193,0.6);
-  backdrop-filter:blur(5px);
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
+    /* ================= POPUP ================= */
 
-.modal-content{
-  background:white;
-  width:100%;
-  max-width:800px;
-  border-radius:30px;
-  overflow:hidden;
-  position:relative;
-  animation:fade 0.4s ease;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-.close{
-  position:absolute;
-  right:18px;
-  top:12px;
-  font-size:22px;
-  color:#ff4fa3;
-  cursor:pointer;
-  font-weight:bold;
-}
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      animation: fadeUp 0.3s ease;
+    }
 
-.modal iframe{
-  width:100%;
-  height:500px;
-  border:none;
-}
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #ff4fa3;
+      font-weight: bold;
+      z-index: 10;
+    }
 
-@keyframes fade{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
-}
+    .modal iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
 
-</style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .modal iframe {
+        height: 350px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="card">
-  <img src="Cuplikan layar 2026-02-26 080155.png" alt="Project">
-  <h2>Pink Flutter Project</h2>
-  <p>
-    Halaman ini menampilkan hasil output dari program Fibonaci yang di buat menggunakan bahasa Dart.
-    Klik tombol di bawah untuk melihat source code.
-  </p>
-  <button onclick="openModal()">Lihat Source Code</button>
-</div>
+  <div class="card">
+    <h2>Program Deret Fibonacci</h2>
+    <p>
+      Halaman ini menampilkan hasil output dari program Fibonacci 
+      yang dibuat menggunakan bahasa Dart.
+      Klik tombol di bawah untuk melihat source code program.
+    </p>
 
-<div class="modal" id="popup">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
-    <iframe src="https://dartpad.dev/embed-dart.html?id=929eb97413537d2a787928ae6f4ca447"></iframe>
+    <button class="top-btn" onclick="openModal()">Lihat Source Code</button>
+
+    <div class="pink-box">
+      <img src="Cuplikan layar 2026-02-26 080155.png" alt="Hasil Output Program Dart">
+    </div>
   </div>
-</div>
 
-<script>
-function openModal(){
-  document.getElementById("popup").style.display="flex";
-}
+  <!-- POPUP -->
+  <div class="modal" id="popup">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">✖</span>
+      <iframe src="https://dartpad.dev/embed-dart.html?id=929eb97413537d2a787928ae6f4ca447"></iframe>
+    </div>
+  </div>
 
-function closeModal(){
-  document.getElementById("popup").style.display="none";
-}
+  <script>
+    function openModal() {
+      document.getElementById("popup").style.display = "flex";
+    }
 
-window.onclick=function(e){
-  const modal=document.getElementById("popup");
-  if(e.target===modal){
-    modal.style.display="none";
-  }
-}
-</script>
+    function closeModal() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // Klik luar popup untuk tutup
+    window.onclick = function(e) {
+      const modal = document.getElementById("popup");
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 
 </body>
 </html>
-     
