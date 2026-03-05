@@ -72,6 +72,8 @@ iframe{
     align-items: center;
     gap: 8px;
     margin: 10px 0 5px 0;
+    position: relative;
+    z-index: 10;
 }
 .btn-popup:hover {
     background-color: #a30552;
@@ -123,6 +125,60 @@ iframe{
 /* kondisi iframe tersembunyi */
 iframe.hidden-iframe {
     display: none;
+}
+
+/* Style untuk Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    overflow: auto;
+}
+
+.modal-content {
+    position: relative;
+    margin: 5% auto;
+    width: 90%;
+    height: 85%;
+    max-width: 1200px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.close-btn {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    color: white;
+    background: #cc0066;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.close-btn:hover {
+    background: #a30552;
 }
 
 /* footer */
@@ -179,24 +235,20 @@ terstruktur dan mudah dikembangkan.
 
 class Car {
   String model;
-  string color;
-  Car(this.brand);
+  String color;
+  Car(this.model, this.color);
   
   void start() {
     print('Car started');
   }
 
   void stop() {
-    printf('Car stopped!');
+    print('Car stopped!');
    }
  }
     </div>
     <!-- TOMBOL IFRAME -->
-    <button class="btn-popup" data-target="iframe1">▶ Jalankan Kode di DartPad</button>
-    <!-- IFRAME (tersembunyi) -->
-    <div class="iframe-wrapper">
-        <iframe id="iframe1" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=0e08132e64feb0dada7f2b1018b0f57a"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('0e08132e64feb0dada7f2b1018b0f57a')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- ===== TOPIK 2 : OBJECT INSTANTIATION ===== -->
@@ -213,20 +265,14 @@ class Car {
 // Kelas  : Si2A
 
 void main() {
-  Car myCar = Car();
+  Car myCar = Car('Sedan', 'Merah');
   
-  myCar.model = "Sedan";
-  myCar.color = "Merah";
-
   myCar.start();
   myCar.stop();
 }
     </div>
     <!-- TOMBOL IFRAME -->
-    <button class="btn-popup" data-target="iframe2">▶ Jalankan Kode di DartPad</button>
-    <div class="iframe-wrapper">
-        <iframe id="iframe2" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=4310ab7f506846fa08fb70f1e4a3a110"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('4310ab7f506846fa08fb70f1e4a3a110')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- ===== TOPIK 3 : CONSTRUCTORS ===== -->
@@ -252,10 +298,7 @@ class Car {
   }
 }
     </div>
-    <button class="btn-popup" data-target="iframe3">▶ Jalankan Kode di DartPad</button>
-    <div class="iframe-wrapper">
-        <iframe id="iframe3" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=df1872db21675f08e077e66af653fc33"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('df1872db21675f08e077e66af653fc33')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- ===== TOPIK 4 : MAHASISWA (PRACTICE) ===== -->
@@ -278,14 +321,11 @@ class Mahasiswa {
   Mahasiswa(this.nama, this.nim, this.ipk);
   
   void perkenalan() {
-    print('NAMA : $nama | IPK : $Iipk');
+    print('NAMA : $nama | IPK : $ipk');
   }
 }
     </div>
-    <button class="btn-popup" data-target="iframe4">▶ Jalankan Kode di DartPad</button>
-    <div class="iframe-wrapper">
-        <iframe id="iframe4" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=d8179e8135108966087d5869f7c114b6"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('d8179e8135108966087d5869f7c114b6')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- ===== TOPIK 5 : ENCAPSULATION ===== -->
@@ -300,11 +340,11 @@ class Mahasiswa {
 // NIM   : 251410018
 // Kelas : SI2A
 
-class produk {
+class Produk {
     final String id, nama;
     final double harga;
-    final int strok;
-    final String katagori;
+    final int stok;
+    final String kategori;
 
     Produk({
         required this.id,
@@ -312,13 +352,10 @@ class produk {
         required this.harga,
         this.stok = 0,
         this.kategori = 'Umum',
-    })
+    });
 }
     </div>
-    <button class="btn-popup" data-target="iframe5">▶ Jalankan Kode di DartPad</button>
-    <div class="iframe-wrapper">
-        <iframe id="iframe5" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=bea65cb8367e25111b04611f775710e1"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('bea65cb8367e25111b04611f775710e1')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- ===== TOPIK 6 : THIS KEYWORD ===== -->
@@ -339,10 +376,7 @@ class Student {
   void display() => print('Student: $name');
 }
     </div>
-    <button class="btn-popup" data-target="iframe6">▶ Jalankan Kode di DartPad</button>
-    <div class="iframe-wrapper">
-        <iframe id="iframe6" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=95dd68716c445a7af79ee01b40ef088b"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('95dd68716c445a7af79ee01b40ef088b')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- ===== TOPIK 7 : PRODUCT CLASS (KODE AWAL DARI SOAL) ===== -->
@@ -354,7 +388,6 @@ class Student {
     </div>
     <!-- CODE DART persis seperti di soal: class Product dan main -->
     <div class="code-block">
-
 // Nama  : Nabilah Cahya Suci 
 // NIM   : 251410018
 // Kelas : SI2A
@@ -369,35 +402,38 @@ void main() {
   print('Produk dibuat: ${product1.nama}');
 }
     </div>
+    <button class="btn-popup" onclick="openDartPad('63831a0983a2fed183c097908a02a75e')">▶ Jalankan Kode di DartPad</button>
+</div>
 
-    <!-- ===== TOPIK 7 : PRODUCT CLASS (KODE AWAL DARI SOAL) ===== -->
+<!-- ===== TOPIK 8 : HEWAN CLASS ===== -->
 <div class="topik-section">
-    <h3 class="topik-judul">🔹 Product Class (Dari Kode Awal Nabilah)</h3>
+    <h3 class="topik-judul">🔹 QUIZ BONUS: HEWAN CLASS</h3>
     <div class="topik-penjelasan">
-        Contoh implementasi class Product sesuai kode awal. 
-        Menampilkan pembuatan objek Keyboard Gaming.
+        Implementasi Kelas Hewan sesuai instruksi diskusi untuk pendefinisian atribut dan metode dasar.
     </div>
-    <!-- CODE DART persis seperti di soal: class Product dan main -->
     <div class="code-block">
-
 // Nama  : Nabilah Cahya Suci 
 // NIM   : 251410018
 // Kelas : SI2A
 
-class Product {
-  String nama;
-  Product(this.nama);
+class Hewan {
+    String nama;
+
+    Hewan(this.nama);
+
+    void bersuara() {
+        print('$nama sedang bersuara...');
+        print('Sound Protocol: [DATA_SOUND_GENERATED]');
+    }
 }
 
 void main() {
-  var product1 = Product('Keyboard Gaming');
-  print('Produk dibuat: ${product1.nama}');
+    var myPet = Hewan('Kucing');
+    print('Nama Hewan: ${myPet.nama}');
+    myPet.bersuara();
 }
     </div>
-    <button class="btn-popup" data-target="iframe7">▶ Jalankan Kode di DartPad</button>
-    <div class="iframe-wrapper">
-        <iframe id="iframe7" class="hidden-iframe" src="https://dartpad.dev/embed-inline.html?id=63831a0983a2fed183c097908a02a75e"></iframe>
-    </div>
+    <button class="btn-popup" onclick="openDartPad('5fcdda6ecd2e2a91feea4ccadff24223')">▶ Jalankan Kode di DartPad</button>
 </div>
 
 <!-- KESIMPULAN -->
@@ -406,36 +442,6 @@ void main() {
 Dengan memahami konsep OOP seperti class, object, constructor, encapsulation, dan this keyword,
 kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangkan.
 </p>
-
-</div> 
-
-<!-11-Class Hewan (Tidak ada link DartPad) ->
-<div class="section">
-<h2>11-QUIZ BONUS: HEWAN CLASS</h2>
-<p>Implementasi Kelas Hewan sesuai instruksi diskusi untuk pendefinisian atribut dan metode dasar.</p>
-<div class="code-box">
-<pre>
-// Nama  : Nabilah Cahya Suci 
-// NIM   : 251410018
-// Kelas : SI2A
-
-   class Hewan {
-    String nama;
-
-    Hewan(this.nama);
-
-    void bersuara() {
-        printf('$nama sedang bersuara...');
-        printf('Soud Protokocol: [DATA_SOUND_GENERATED]');
-    }
-}
-    void main() {
-        var myPet = Hewan('Kucing');
-        print(Nama Hewan: ${myPet.nama}');
-        myPet.barsuara();
-    }
-</pre>
-</div>
 
 </div>
 
@@ -447,6 +453,10 @@ kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangka
     </div>
 </div>
 
+<footer>
+    <p>&copy; 2025 - Laporan OOP Dart Nabilah Cahya Suci</p>
+</footer>
+
 <script>
     // SECURITY PROTOCOL: ANTI-VANDALISM & ANTI-VIEWSOURCE
     document.addEventListener('contextmenu', e => e.preventDefault());
@@ -456,18 +466,14 @@ kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangka
       if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
       if (e.ctrlKey && e.keyCode == 83) return false; // Ctrl+S
     };
-    document.onselectstart = function () { return false; };
-
+    
     // Fungsi untuk membuka DartPad di modal
     function openDartPad(id) {
         const modal = document.getElementById('dartpadModal');
         const iframe = document.getElementById('dartpadIframe');
         
-        // Hapus trailing slash jika ada
-        id = id.replace(/\/$/, '');
-        
         // Set src iframe dengan ID yang benar
-        iframe.src = https://dartpad.dev/embed-inline.html?id=${id}&theme=dark&run=true;
+        iframe.src = 'https://dartpad.dev/embed-inline.html?id=' + id + '&theme=dark&run=true';
         
         // Tampilkan modal
         modal.style.display = 'block';
@@ -498,8 +504,6 @@ kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangka
             closeDartPad();
         }
     }
-
-   
 </script>
 
 </body>
