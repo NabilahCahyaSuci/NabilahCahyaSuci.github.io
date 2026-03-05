@@ -1,72 +1,184 @@
-<h1>OOP Dart</h1>
-    <p>Nama: Nabilah Cahya Suci</p>
-    <p>NIM: 251410018</p>
-    <p>Kelas: SI2A</p>
-</header>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Deret Fibonacci</title>
 
-<div class="container">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<h2>Pengertian OOP</h2>
-<p>
-Object Oriented Programming (OOP) adalah pendekatan dalam pemrograman yang 
-mengorganisasi kode ke dalam bentuk objek. Objek ini merepresentasikan 
-sesuatu yang memiliki data serta perilaku sehingga program menjadi lebih 
-terstruktur dan mudah dikembangkan.
-</p>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #ff9ecf, #ffc2e2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-<h2>Konsep-Konsep OOP</h2>
-<ul>
-<li><b>Class</b> sebagai cetakan untuk membuat objek.</li>
-<li><b>Object</b> sebagai hasil nyata dari class.</li>
-<li><b>Encapsulation</b> untuk membatasi akses langsung ke data.</li>
-<li><b>Inheritance</b> untuk mewariskan sifat ke class lain.</li>
-<li><b>Polymorphism</b> untuk memungkinkan method memiliki banyak bentuk.</li>
-</ul>
+    .card {
+      width: 100%;
+      max-width: 850px;
+      background: #ffffff;
+      border-radius: 35px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.25);
+      text-align: center;
+    }
 
-<h2>Class Sederhana (Car)</h2>
-<p>
-Contoh berikut menunjukkan pembuatan class sederhana bernama Car di Dart.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=0e08132e64feb0dada7f2b1018b0f57a"></iframe>
+    h2 {
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ff4fa3;
+    }
 
-<h2>Object Instantiation</h2>
-<p>
-Bagian ini memperlihatkan proses pembuatan objek dari class yang sudah dibuat.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=4310ab7f506846fa08fb70f1e4a3a110"></iframe>
+    p {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
 
-<h2>Constructors</h2>
-<p>
-Constructor digunakan untuk memberikan nilai awal pada atribut ketika objek dibuat.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=df1872db21675f08e077e66af653fc33"></iframe>
+    .top-btn {
+      display: block;
+      margin: 0 auto 25px auto;
+      background: #ff4fa3;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
 
-<h2>Practice Class Mahasiswa</h2>
-<p>
-Latihan implementasi class Mahasiswa dengan atribut dan method sederhana.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=d8179e8135108966087d5869f7c114b6"></iframe>
+    .top-btn:hover {
+      background: #e13d8d;
+      transform: scale(1.05);
+    }
 
-<h2>Encapsulation</h2>
-<p>
-Encapsulation membatasi akses langsung ke data menggunakan private variable dan getter/setter.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=bea65cb8367e25111b04611f775710e1"></iframe>
+    .pink-box {
+      background: #ffe6f2;
+      padding: 20px;
+      border-radius: 25px;
+    }
 
-<h2>This Keyword</h2>
-<p>
-Keyword <b>this</b> digunakan untuk merujuk pada atribut milik class agar tidak tertukar dengan parameter.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=95dd68716c445a7af79ee01b40ef088b"></iframe>
+    img {
+      width: 100%;
+      border-radius: 20px;
+    }
 
-<h2>Product Class</h2>
-<p>
-Contoh implementasi class Product yang lebih mendekati kasus penggunaan nyata.
-</p>
-<iframe src="https://dartpad.dev/embed-inline.html?id=63831a0983a2fed183c097908a02a75e"></iframe>
+    /* ================= POPUP ================= */
 
-<h2>Kesimpulan</h2>
-<p>
-Dengan memahami konsep OOP seperti class, object, constructor, encapsulation, dan this keyword,
-kita dapat membangun program yang lebih rapi, terstruktur, dan mudah dikembangkan.
-</p>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #ff4fa3;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .modal iframe {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Program Deret Fibonacci</h2>
+    <p>
+      Halaman ini menampilkan hasil output dari program Fibonacci 
+      yang dibuat menggunakan bahasa Dart.
+      Klik tombol di bawah untuk melihat source code program.
+    </p>
+
+    <button class="top-btn" onclick="openModal()">Lihat Source Code</button>
+
+    <div class="pink-box">
+      <img src="Cuplikan layar 2026-02-26 080155.png" alt="Hasil Output Program Dart">
+    </div>
+  </div>
+
+  <!-- POPUP -->
+  <div class="modal" id="popup">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">✖</span>
+      <iframe src="https://dartpad.dev/embed-dart.html?id=929eb97413537d2a787928ae6f4ca447"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // Klik luar popup untuk tutup
+    window.onclick = function(e) {
+      const modal = document.getElementById("popup");
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
